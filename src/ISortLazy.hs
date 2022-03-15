@@ -31,8 +31,8 @@ isort []     = pure LNil
 isort (x:xs) = bbind 1 (isort xs) (insert x) 
 
 
-{-@ minimum :: Ord a => {v:[a] | 0 < length v} 
-            -> RTick a @-} 
+{-@ minimum :: Ord a => xs:{[a] | 0 < length xs} 
+            -> {t:RTick a | tcost t <= length xs} @-} 
 minimum :: Ord a => [a] -> RTick a 
 minimum xs = pure lhead <*> isort xs 
 

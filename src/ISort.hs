@@ -12,7 +12,8 @@ import RTick
 insert :: (Ord a) => a -> [a] -> RTick [a]
 {-@ insert :: (Ord a) 
            => x:a -> xs:OList a
-           -> {t:RTick {os:(OList a) | length os == length xs + 1} | tcost t <= length xs } @-}
+           -> {t: RTick {os:(OList a) | length os == length xs + 1} 
+                | tcost t <= length xs } @-}
 insert x []   = pure [x]
 insert x (y:ys) 
   | x <= y    = step (x:y:ys)
@@ -24,6 +25,7 @@ insert x (y:ys)
 isort :: Ord a => [a] -> RTick [a]
 isort []     = pure [] 
 isort (x:xs) = bbind (length xs) (isort xs) (insert x) 
+
 
 {-@ iminimum :: Ord a => xs:{[a] | 0 < length xs } 
              -> {t:RTick a | tcost t <= length xs * length xs } @-}
