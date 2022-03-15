@@ -11,7 +11,11 @@ library
       RTick
     , ISort 
     , ISortSorted  
-    , ISortLazy  
+    , LList  
+    , ISortLazy 
+  other-modules:
+      Language.Haskell.Liquid.ProofCombinators 
+    , List     
   build-depends:
       liquid-base
     , liquidhaskell
